@@ -42,7 +42,7 @@ This script counts of word in a text file that contains A.SANCAR's summary of li
 $ ./src/run/wc/run.sh
 ```
 
-## [Docker Swarm for Multiple Hosts Hadoop Setup]((https://www.youtube.com/watch?v=nGSNULpHHZc))
+## [Docker Swarm for Multiple Hosts Hadoop Setup](https://www.youtube.com/watch?v=nGSNULpHHZc)
 
 `Step: 1`: Start Swarm on master node. Use the token generated to join slaves to the swarm
 
