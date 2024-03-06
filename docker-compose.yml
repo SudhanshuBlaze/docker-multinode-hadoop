@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+  master:
+    image: base-hadoop
+    networks:
+      - hadoop-overlay
+    ports:
+      - "8080:8080"
+      - "8088:8088"
+      - "9870:9870"
+    environment:
+      - NODE_TYPE=master
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
+
+  worker1:
+    image: base-hadoop
+    networks:
+      - hadoop-overlay
+    environment:
+      - NODE_TYPE=worker
+    deploy:
+      replicas: 1
+
+  worker2:
+    image: base-hadoop
+    networks:
+      - hadoop-overlay
+    environment:
+      - NODE_TYPE=worker
+    deploy:
+      replicas: 1
+
+networks:
+  hadoop-overlay:
+    driver: overlay
+    ipam:
+      config:
+        - subnet: 10.0.9.0/24

@@ -96,3 +96,25 @@ docker exec -ti master bash -c "hadoop namenode -format && /usr/local/hadoop/sbi
 ```sh
 docker exec -ti worker1 bash -c "/usr/local/hadoop/sbin/hadoop-daemon.sh start datanode && /usr/local/hadoop/sbin/yarn-daemon.sh start nodemanager"
 ```
+
+
+## Using Docker Compose
+
+
+You have your Docker Swarm cluster! Now you have to label all the nodes to indicate which one will be the master and workers. On master node run:
+
+- List all cluster nodes to get their ID: 
+
+```sh
+docker node ls
+```
+
+- Label master node as master: 
+```sh
+docker node update --label-add role=master <MASTER NODE ID>
+```
+
+- For every worker ID node run: 
+```sh
+docker node update --label-add role=worker <WORKER NODE ID>
+```
