@@ -42,7 +42,7 @@ This script counts of word in a text file that contains A.SANCAR's summary of li
 $ ./src/run/wc/run.sh
 ```
 
-## [Docker Swarm for Multiple Hosts Hadoop Setup]((https://www.youtube.com/watch?v=nGSNULpHHZc))
+## [Docker Swarm for Multiple Hosts Hadoop Setup](<(https://www.youtube.com/watch?v=nGSNULpHHZc)>)
 
 `Step: 1`: Start Swarm on master node. Use the token generated to join slaves to the swarm
 
@@ -71,7 +71,7 @@ docker build -t base-hadoop .
 `Step: 4`: Start the master container on the **master host/node**
 
 ```sh
-docker run -itd  --name master --net hadoop-overlay --ip 10.0.9.22 --hostname master --add-host worker1:10.0.9.23 --add-host worker2:10.0.9.24 -p 8080:8080 -p 8088:8088 -p 9870:9870 base-hadoop
+docker run -itd  --name master --net hadoop-overlay --ip 10.0.9.22 --hostname master --add-host worker1:10.0.9.23 --add-host worker2:10.0.9.24 -p 8081:8080 -p 8088:8088 -p 9871:9870 base-hadoop
 ```
 
 `Step: 5`: Start the worker container 1 on **slave host/node**
@@ -80,7 +80,8 @@ docker run -itd  --name master --net hadoop-overlay --ip 10.0.9.22 --hostname ma
 docker run -itd --name worker1 --net hadoop-overlay --ip 10.0.9.23 --hostname worker1 --add-host master:10.0.9.22 base-hadoop
 ```
 
-`Step: 6`*(Optional): Start the worker container 2 in the same way on **slave host/node**:*
+`Step: 6`_(Optional): Start the worker container 2 in the same way on **slave host/node**:_
+
 ```sh
 docker run -itd --name worker2 --net hadoop-overlay --ip 10.0.9.24 --hostname worker2 --add-host master:10.0.9.22 base-hadoop
 ```
@@ -97,24 +98,24 @@ docker exec -ti master bash -c "hadoop namenode -format && /usr/local/hadoop/sbi
 docker exec -ti worker1 bash -c "/usr/local/hadoop/sbin/hadoop-daemon.sh start datanode && /usr/local/hadoop/sbin/yarn-daemon.sh start nodemanager"
 ```
 
-
 ## Using Docker Compose
-
 
 You have your Docker Swarm cluster! Now you have to label all the nodes to indicate which one will be the master and workers. On master node run:
 
-- List all cluster nodes to get their ID: 
+- List all cluster nodes to get their ID:
 
 ```sh
 docker node ls
 ```
 
-- Label master node as master: 
+- Label master node as master:
+
 ```sh
 docker node update --label-add role=master <MASTER NODE ID>
 ```
 
-- For every worker ID node run: 
+- For every worker ID node run:
+
 ```sh
 docker node update --label-add role=worker <WORKER NODE ID>
 ```
